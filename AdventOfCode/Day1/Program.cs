@@ -33,20 +33,9 @@ namespace Day1
         {
             var values = input.Select(int.Parse).ToList();
 
-            int result = 0;
-            int sum = values[0] + values[1] + values[2];
-
-            for (int i = 1; i < values.Count() - 2; i ++)
-            {
-                var value = values[i] + values[i + 1] + values[i + 2];
-
-                if (value > sum)
-                {
-                    result++;
-                }
-
-                sum = value;
-            }
+            int result = values.Skip(3)
+            .Select((x, i) => x > values[i])
+            .Count(y => y);
 
             return result;
         }
